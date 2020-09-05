@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-
+#https://docs.djangoproject.com/en/3.1/ref/templates/builtins/ template tags use in variable in \templates
 # Create your views here.
 def home_view(request,*args , **kwargs):
     print(args , kwargs)
@@ -13,7 +13,7 @@ def contact_view(request,*args , **kwargs):
 
 def about_view(request,*args , **kwargs):
     my_context = {
-        "my_text"    : "This is about us",
+        "title"    : "this is about us",
         "my_number"  : 123,
         "my_list"    : [123,234,345,"Nawata Mute"] 
     }
