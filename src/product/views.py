@@ -1,8 +1,17 @@
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import ProductForm, RawProductForm
 from .models import Product
 
 # Create your views here.
+
+def dynamic_lookup_view(request,id):
+    obj = Product.objects.get(id=id);
+    context = {
+        "object": obj
+    }
+    return render(request, "products/product_detail.html", context)
+
 
 
 def render_initial_data(request):
