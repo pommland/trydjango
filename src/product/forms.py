@@ -7,7 +7,7 @@ class ProductForm(forms.ModelForm):
 
     title       = forms.CharField(label = "",
                         widget = forms.TextInput(attrs={"placeholder" : "Your title"}))
-    email       = forms.EmailField()
+    # email       = forms.EmailField()
     description = forms.CharField(required = False ,
                                 widget = forms.Textarea(
                                     attrs = {
@@ -28,17 +28,17 @@ class ProductForm(forms.ModelForm):
             'description',
             'price'
         ]
-    def clean_title(self, *args,**kwargs):
-        title = self.cleaned_data.get('title')
-        if not "CFE" in title :
-            raise forms.ValidationError("This is not Valid title")
-        return title
+    # def clean_title(self, *args,**kwargs):
+    #     title = self.cleaned_data.get('title')
+    #     if not "CFE" in title :
+    #         raise forms.ValidationError("This is not Valid title")
+    #     return title
     
-    def clean_email(self, *args , **kwargs):
-        email = self.cleaned_data.get("email")
-        if not email.endswith("edu"):
-            raise forms.ValidationError("This is not valid email")
-        return email
+    # def clean_email(self, *args , **kwargs):
+    #     email = self.cleaned_data.get("email")
+    #     if not email.endswith("edu"):
+    #         raise forms.ValidationError("This is not valid email")
+    #     return email
 
 # https://docs.djangoproject.com/en/3.1/ref/forms/fields/,
 class RawProductForm(forms.Form):
