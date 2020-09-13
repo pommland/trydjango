@@ -1,12 +1,32 @@
-from django.http import Http404
+from django.http import  Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import ProductForm, RawProductForm
 from .models import Product
 
 # Create your views here.
 
+
+
+def product_delete_view(request, id):
+    obj = get_object_or_404(Product, id=id)
+    #POST request
+    if request.method == "POST":
+        # confirming delete
+        obj.delete()
+        return redirect("home")
+    context = {
+        "object": obj
+    }
+    return render(request, "products/product_delete.html", context)
+    
 def dynamic_lookup_view(request,id):
-    obj = Product.objects.get(id=id);
+    # obj = Product.objects.get(id=id);
+    obj = get_object_or_404(Product, id = id)
+    # obj = Product.objects.get(id=id)
+    # try:
+    #     obj =Product.objects.get(id=id)
+    # except Product.DoesNotExist:
+    #     raise Http404
     context = {
         "object": obj
     }
