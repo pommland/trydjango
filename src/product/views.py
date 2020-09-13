@@ -5,6 +5,14 @@ from .models import Product
 
 # Create your views here.
 
+def product_list_view(request):
+    queryset = Product.objects.all() # list of objects
+    context = {
+        "object_list": queryset
+    }
+    return render(request, "products/product_list.html", context)
+
+
 
 
 def product_delete_view(request, id):
@@ -13,7 +21,7 @@ def product_delete_view(request, id):
     if request.method == "POST":
         # confirming delete
         obj.delete()
-        return redirect("home")
+        return redirect("product-list")
     context = {
         "object": obj
     }
