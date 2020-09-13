@@ -14,30 +14,33 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include,path
 from pages.views import home_view,contact_view,about_view
-from product.views import (
-    product_datail_view,
-    product_delete_view,
-    product_create_view,
-    render_initial_data,
-    product_list_view,
-    dynamic_lookup_view
-)
+# from product.views import (
+#     product_create_view,
+#     product_datail_view,
+#     product_delete_view,
+#     product_list_view,
+#     product_update_view
+#     # render_initial_data,
+#     # dynamic_lookup_view
+# )
 urlpatterns = [
 
-    path('products/', product_list_view, name='product-list'),
-    path('products/<int:id>/', dynamic_lookup_view, name='product_detail'),
-    path('products/<int:id>/delete/', product_delete_view, name='product-delete'),
+    # path('products/', product_list_view, name='product-list'),
+    # path('products/create', product_create_view, name='product-list'),
+    # path('products/<int:id>/', product_datail_view, name='product_detail'),
+    # path('products/<int:id>/update', product_update_view, name='product-update'),
+    # path('products/<int:id>/delete/', product_delete_view, name='product-delete'),
 
 
 
-    
+    path('products/', include('product.urls')),
     path('', home_view, name ="home"),
     path('contact/', contact_view),
-    path('about/', about_view),
-    path('create/', product_create_view),
-    path('initial/', render_initial_data),
-    path('product/', product_datail_view),
+    path('about/<int:id>/', about_view, name='product-detail'),
     path('admin/', admin.site.urls),
+    # path('create/', product_create_view),
+    # path('initial/', render_initial_data),
+    # path('product/', product_datail_view),
 ]
